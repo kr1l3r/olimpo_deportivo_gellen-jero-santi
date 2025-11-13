@@ -1,0 +1,82 @@
+
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ahorcadito Deportivo</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to bottom right, #000, #990000);
+    color: white;
+    text-align: center;
+  }
+  h1 { margin-top: 30px; }
+  #palabra { font-size: 2em; letter-spacing: 10px; }
+  button {
+    margin: 10px;
+    padding: 10px 15px;
+    background: #990000;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  button:hover {
+    background: #cc0000;
+  }
+</style>
+</head>
+<body>
+  <h1>🏋️‍♂️ Ahorcadito Deportivo</h1>
+  <p id="palabra"></p>
+  <p>Errores: <span id="errores">0</span></p>
+  <div id="letras"></div>
+  <button onclick="window.location.href='index.html'">Volver</button>
+
+<script>
+  const palabras = ["FUTBOL","BALONCESTO","TENIS","GIMNASIA","CICLISMO","BOXEO","NATACION","VOLEIBOL"];
+  let palabra = palabras[Math.floor(Math.random()*palabras.length)];
+  let oculto = "_".repeat(palabra.length);
+  let errores = 0;
+
+  const palabraDiv = document.getElementById("palabra");
+  const letrasDiv = document.getElementById("letras");
+  palabraDiv.innerText = oculto.split("").join(" ");
+
+  for(let i=65; i<=90; i++){
+    const btn = document.createElement("button");
+    btn.innerText = String.fromCharCode(i);
+    btn.onclick = ()=>intento(btn.innerText);
+    letrasDiv.appendChild(btn);
+  }
+
+  function intento(letra){
+    let nuevo = "";
+    let acierto = false;
+    for(let i=0; i<palabra.length; i++){
+      if(palabra[i] === letra){
+        nuevo += letra;
+        acierto = true;
+      } else {
+        nuevo += oculto[i];
+      }
+    }
+    oculto = nuevo;
+    palabraDiv.innerText = oculto.split("").join(" ");
+    if(!acierto){
+      errores++;
+      document.getElementById("errores").innerText = errores;
+      if(errores >= 6){
+        alert("Perdiste 😭 La palabra era: " + palabra);
+        location.reload();
+      }
+    } else if(!oculto.includes("_")){
+      alert("¡Ganaste! 🎉 La palabra era: " + palabra);
+      location.reload();
+    }
+  }
+</script>
+</body>
+</html>

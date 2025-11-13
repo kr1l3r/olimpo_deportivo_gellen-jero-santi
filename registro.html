@@ -1,0 +1,200 @@
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro / Ingreso - Olimpo Deportivo</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom right, #000, #990000);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .contenedor {
+      background: #111;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px #cc0000;
+      width: 350px;
+      text-align: center;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 10px;
+      background: #222;
+      color: white;
+      font-size: 16px;
+    }
+
+    button {
+      background: #990000;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.3s;
+    }
+
+    button:hover { background: #cc0000; }
+
+    a {
+      color: #cc0000;
+      text-decoration: none;
+      display: block;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+
+    .error, .exito {
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 10px;
+      font-size: 14px;
+      display: none;
+    }
+
+    .error { background-color: #330000; color: #ff6666; }
+    .exito { background-color: #004400; color: #66ff66; }
+  </style>
+</head>
+<body>
+  <div class="contenedor">
+    <h2 id="titulo">Iniciar Sesión</h2>
+    <form id="formulario">
+      <input type="text" id="usuario" placeholder="Usuario" autocomplete="off">
+      <input type="email" id="correo" placeholder="Correo electrónico" autocomplete="off" style="display: none;">
+      <input type="password" id="contraseña" placeholder="Contraseña" autocomplete="off">
+      <button type="submit" id="btnAccion">Entrar</button>
+    </form>
+    <div id="mensaje" class="error"></div>
+    <div id="exito" class="exito"></div>
+
+    <a id="toggleModo">¿No tienes cuenta? Regístrate aquí</a>
+    <a href="index.html">Volver al inicio</a>
+  </div>
+
+  <script>
+    const form = document.getElementById('formulario');
+    const usuario = document.getElementById('usuario');
+    const correo = document.getElementById('correo');
+    const contraseña = document.getElementById('contraseña');
+    const mensaje = document.getElementById('mensaje');
+    const exito = document.getElementById('exito');
+    const titulo = document.getElementById('titulo');
+    const btnAccion = document.getElementById('btnAccion');
+    const toggleModo = document.getElementById('toggleModo');
+
+    let modoRegistro = false; // false = login, true = registro
+
+    // --- Cambiar entre registro e inicio ---
+    toggleModo.addEventListener('click', () => {
+      modoRegistro = !modoRegistro;
+      if (modoRegistro) {
+        titulo.textContent = 'Registrar Cuenta';
+        btnAccion.textContent = 'Registrar';
+        correo.style.display = 'block';
+        toggleModo.textContent = '¿Ya tienes cuenta? Inicia sesión aquí';
+      } else {
+        titulo.textContent = 'Iniciar Sesión';
+        btnAccion.textContent = 'Entrar';
+        correo.style.display = 'none';
+        toggleModo.textContent = '¿No tienes cuenta? Regístrate aquí';
+      }
+      mensaje.style.display = 'none';
+      exito.style.display = 'none';
+      form.reset();
+    });
+
+    // --- Funciones auxiliares ---
+    const obtenerUsuarios = () => JSON.parse(localStorage.getItem('usuarios')) || [];
+    const guardarUsuarios = (usuarios) => localStorage.setItem('usuarios', JSON.stringify(usuarios));
+    const validarCorreo = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+    // --- Enviar formulario ---
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      mensaje.style.display = 'none';
+      exito.style.display = 'none';
+
+      const nombre = usuario.value.trim();
+      const email = correo.value.trim().toLowerCase();
+      const pass = contraseña.value.trim();
+
+      if (nombre === '' || pass === '' || (modoRegistro && email === '')) {
+        mensaje.textContent = '⚠️ Por favor completa todos los campos.';
+        mensaje.style.display = 'block';
+        return;
+      }
+
+      if (modoRegistro && !validarCorreo(email)) {
+        mensaje.textContent = '📧 Ingresa un correo electrónico válido.';
+        mensaje.style.display = 'block';
+        return;
+      }
+
+      if (pass.length < 6) {
+        mensaje.textContent = '🔒 La contraseña debe tener al menos 6 caracteres.';
+        mensaje.style.display = 'block';
+        return;
+      }
+
+      let usuarios = obtenerUsuarios();
+
+      if (modoRegistro) {
+        // --- Registro ---
+        if (usuarios.find(u => u.nombre === nombre || u.correo === email)) {
+          mensaje.textContent = '⚠️ Ya existe un usuario o correo registrado.';
+          mensaje.style.display = 'block';
+          return;
+        }
+
+        const nuevoUsuario = { nombre, correo: email, contraseña: pass };
+        usuarios.push(nuevoUsuario);
+        guardarUsuarios(usuarios);
+        localStorage.setItem('usuarioActivo', JSON.stringify(nuevoUsuario));
+        exito.textContent = `🆕 Usuario registrado correctamente. Bienvenido, ${nombre}!`;
+        exito.style.display = 'block';
+        setTimeout(() => window.location.href = 'bienvenida.html', 2000);
+
+      } else {
+        // --- Inicio de sesión ---
+        const existente = usuarios.find(u => u.nombre === nombre);
+        if (!existente) {
+          mensaje.textContent = '❌ Usuario no encontrado.';
+          mensaje.style.display = 'block';
+          return;
+        }
+
+        if (existente.contraseña !== pass) {
+          mensaje.textContent = '❌ Contraseña incorrecta.';
+          mensaje.style.display = 'block';
+          return;
+        }
+
+        localStorage.setItem('usuarioActivo', JSON.stringify(existente));
+        exito.textContent = `✅ Bienvenido de nuevo, ${existente.nombre}!`;
+        exito.style.display = 'block';
+        setTimeout(() => window.location.href = 'bienvenida.html', 2000);
+      }
+    });
+  </script>
+</body>
+</html>
+

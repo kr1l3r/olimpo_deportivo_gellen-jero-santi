@@ -1,0 +1,65 @@
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bienvenido - Olimpo Deportivo</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom right, #000, #990000);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    h1 { color: #ff4444; margin-bottom: 20px; }
+    p { color: #ddd; }
+    button {
+      margin-top: 30px;
+      background: #990000;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover { background: #cc0000; }
+  </style>
+</head>
+<body>
+  <h1 id="saludo"></h1>
+  <p id="correo"></p>
+  <p id="redireccion"></p>
+  <button id="cerrarSesion">Cerrar sesión ahora</button>
+
+  <script>
+    const usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
+    const saludo = document.getElementById('saludo');
+    const correo = document.getElementById('correo');
+    const cerrarSesion = document.getElementById('cerrarSesion');
+    const redireccion = document.getElementById('redireccion');
+
+    if (usuarioActivo) {
+    redireccion.textContent = "Serás redirigido al inicio";
+
+      // 🔁 Redirigir automáticamente a index.html después de 0 segundos
+      setTimeout(() => {
+        localStorage.removeItem('usuarioActivo'); // Cierra la sesión
+        window.location.href = 'index.html';
+      }, 5000);
+    } else {
+      saludo.textContent = 'No has iniciado sesión.';
+      setTimeout(() => window.location.href = 'registro.html', 2000);
+    }
+
+    // Cerrar sesión manualmente
+    cerrarSesion.addEventListener('click', () => {
+      localStorage.removeItem('usuarioActivo');
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>
