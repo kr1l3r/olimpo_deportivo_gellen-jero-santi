@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Olimpo Deportivo</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom right, #000000, #990000);
+      color: white;
+    }
+
+    header {
+      text-align: center;
+      background: #111;
+      padding: 30px;
+      position: relative;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 3em;
+      letter-spacing: 3px;
+    }
+
+    .registro-btn {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      background: #990000;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background 0.3s;
+    }
+
+    .registro-btn:hover {
+      background: #cc0000;
+    }
+
+    section {
+      margin: 40px auto;
+      width: 90%;
+    }
+
+    h2 {
+      border-left: 5px solid #cc0000;
+      padding-left: 10px;
+      margin-bottom: 15px;
+    }
+
+    .noticias {
+      display: flex;
+      overflow-x: auto;
+      gap: 15px;
+      padding-bottom: 10px;
+    }
+
+    .tarjeta {
+      flex: 0 0 calc(20% - 10px);
+      background: #1a1a1a;
+      border-radius: 15px;
+      box-shadow: 0 0 10px #cc0000;
+      padding: 15px;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .tarjeta:hover {
+      transform: scale(1.05);
+    }
+
+    .tarjeta img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    footer {
+      background: #111;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      font-size: 0.9em;
+    }
+
+    a.juego-link {
+      display: inline-block;
+      margin: 15px;
+      padding: 12px 20px;
+      background: #990000;
+      color: white;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    a.juego-link:hover {
+      background: #cc0000;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🏆 Olimpo Deportivo 🏆</h1>
+    <button class="registro-btn" onclick="window.location.href='registro.html'">Registro / Ingreso</button>
+  </header>
+
+  <section>
+    <h2>⚽ Fútbol</h2>
+    <div class="noticias">
+      <div class="tarjeta"><img src="https://phantom-marca-mx.unidadeditorial.es/49b05adebc50530a4be3cbc7d57574bd/resize/828/f/jpg/mx/assets/multimedia/imagenes/2023/08/03/16910680997105.jpg">
+	<a href="https://www.telemundo51.com/deportes/messi-marca-doblete-y-el-inter-miami-avanza-a-semifinales-de-la-copa-de-campeones-de-la-concacaf/2647092/" target="_blank">Ver más</a>
+	<p>Messi marca doblete en la final de la Copa.</p></div>
+      <div class="tarjeta"><img src="https://estaticos-cdn.prensaiberica.es/clip/f35ba093-2aea-462e-85bb-86c8b019a72b_alta-libre-aspect-ratio_default_0.jpg">
+	<a href="https://www.directvsports.com/futbol/Barcelona-inicio-negociaciones-por-una-joven-promesa-de-Brasil-20250624-0031.html"       	target="_blank">Ver más</a>
+	<p>El Real Madrid ficha nueva promesa brasileña.</p></div>
+      <div class="tarjeta"><img src="https://files.winsports.co/cms/2025/07/11163538/seleccion-Colombia-Femenina-2025.jpg?w=640"><p>Colombia clasifica a la Copa América 2025.</p>
+<a href="https://fcf.com.co/2025/07/25/colombia-clasifica-a-la-semifinal-de-la-conmebol-copa-america-ecuador-2025/"       	target="_blank">Ver más</a></div>
+      <div class="tarjeta"><img src="https://www.fcbarcelona.com/photo-resources/2023/09/22/c78a7470-a1f2-49d2-aafb-7b7efc4da920/mini_3200x2000-XAVI2025.png?width=1200&height=750">
+	<a href="https://efe.com/deportes/2023-09-22/xavi-hernandez-entrenador-barcelona-renovacion-hasta-2025/"_blank">Ver más</a>
+	<p>Barcelona anuncia renovación de Xavi.</p></div>
+      <div class="tarjeta"><img src="https://editorial.uefa.com/resources/028d-1b056d6cb463-dbb11541a219-1000/previews_-_uefa_champions_league_final_2023_24.jpeg">
+	<a href="https://www.elperiodico.com/es/deportes/20250221/final-champions-2025-sede-fecha-dv-118510555">Ver más</a>
+	<p>Final de Champions se jugará en Londres.</p></div>
+    </div> 
+  </section>
+
+  <section>
+    <h2>🏀 Baloncesto</h2>
+    <div class="noticias">
+      <div class="tarjeta"><img src="https://c.files.bbci.co.uk/28C4/production/_128563401_gettyimages-1463993781.jpg">
+	<a href="https://www.espn.com.mx/basquetbol/nota/_/id/14873519/nba-lebron-james-primer-jugador-alcanza-50000-puntos">Ver más</a>
+	<p>LeBron alcanza récord histórico de puntos.</p></div>
+      <div class="tarjeta"><img src="https://cdn.hispanosnba.com/wp-content/uploads/2025/09/proyecciones-lakers-2025-2026.jpg">
+	<a href="https://www.youtube.com/watch?v=XFIG5tc7DqQ">Ver más</a>
+	<p>Los Lakers triunfan en una remontada épica.</p></div>
+      <div class="tarjeta"><img src="https://www.marketingregistrado.com/img/noticias/big/comienza-nba-202526-impresionante-desglose-economico.webp">
+	<a href="https://espndeportes.espn.com/basquetbol/nota/_/id/15247111/pacers-vs-thunder-nba-finals-2025-horarios-resultados-highlights">Ver más</a>
+	<p>Final de la NBA promete espectáculo total.</p></div>
+       <div class="tarjeta"><img src="https://jgbasket.net/wp-content/uploads/2013/05/stephen-curry-golden-state-.jpg">
+	<a href="https://about.underarmour.com/es/stories/2023/08/curry-camp-convenes-basketball-s-best-in-the-bay-area-.html">Ver más</a>
+	<p>Curry Camp convoca a los mejores jugadores de baloncesto en el Área de la Bahía</p></div>
+	<div class="tarjeta"><img src="https://assets.fiba.basketball/image/upload/v1756130658/qkhrxfkyvrfew0s30rsq.jpg">
+	<a href="https://www.vavel.com/es/baloncesto/2025/09/29/1235689-quien-es-miika-muurinen-el-diamante-finlandes-que-aterriza-en-la-euroliga.html">Ver más</a>
+	<p>Quién es Miika Muurinen, el diamante finlandés que aterriza en la EuroLiga.</p></div>
+    </div>
+  </section>
+  <center>
+    <h2>🎮 ¡Juega y gana puntos!</h2>
+    <a href="penaltis.html" class="juego-link">⚽ Juego de Penaltis</a>
+    <a href="ahorcadito.html" class="juego-link">🏋️‍♂️ Ahorcadito Deportivo</a>
+  </center>
+
+  <footer>
+    <p>© 2025 Olimpo Deportivo - Todos los derechos reservados</p>
+  </footer>
+
+</body>
+</html>
